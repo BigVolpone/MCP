@@ -2,8 +2,8 @@
 FROM node:22.12-alpine AS builder
 WORKDIR /app
 
-# Copier uniquement les fichiers nécessaires pour Google Maps
-COPY ./package.json ./package-lock.json ./
+# Copier uniquement les fichiers nécessaires
+COPY ./package.json ./
 COPY ./tsconfig.json ./tsconfig.json
 COPY ./index.ts ./index.ts
 
@@ -13,7 +13,7 @@ RUN npm install
 # Construire l'application
 RUN npm run build
 
-# Étape finale : créer une image minimale pour la production
+# Étape finale : créer une image prête pour la production
 FROM node:22-alpine AS release
 WORKDIR /app
 
